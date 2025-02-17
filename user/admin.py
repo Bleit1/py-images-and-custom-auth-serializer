@@ -14,7 +14,6 @@ class CustomUserAdmin(DjangoUserAdmin):
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
 
-
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
