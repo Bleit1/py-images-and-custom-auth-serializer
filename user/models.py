@@ -8,9 +8,6 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
-        """
-        Create and save a user with given email and password.
-        """
         if not email:
             raise ValueError("The given email must be set")
         email = self.normalize_email(email)
@@ -37,10 +34,16 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    username = None
+    username = models.CharField(max_length=150, unique=True, blank=True, null=True)
     email = models.EmailField(_("email address"), unique=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+    payload = {
+        "username": "admin.user",
+        "email": "test@example.com",
+        "password": "1qazcde3"
+    }
+
